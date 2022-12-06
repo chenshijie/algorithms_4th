@@ -13,7 +13,7 @@ Solution: Java has a built-in method Integer.toBinaryString(N) for this job, but
  */
 public class Ex1_1_9 {
     public static void main(String[] args) {
-        StdOut.println("Ex1_1_7");
+        StdOut.println("Ex1_1_9");
         StdOut.println("Please input a positive integer:");
         int num = StdIn.readInt();
 
