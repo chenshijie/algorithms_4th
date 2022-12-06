@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 /*
 1.1.3 Write a program that takes three integer command-line arguments and prints
- * equal if all three are equal, and not equal otherwise.
+equal if all three are equal, and not equal otherwise
  */
 public class Ex1_1_3 {
     public static void main(String[] args) {
