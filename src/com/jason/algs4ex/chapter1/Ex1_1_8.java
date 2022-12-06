@@ -11,7 +11,7 @@ Explain each outcome.
  */
 public class Ex1_1_8 {
     public static void main(String[] args) {
-        StdOut.println("Ex1_1_7");
+        StdOut.println("Ex1_1_8");
 
         System.out.println('b');
         System.out.println('b' + 'c');
