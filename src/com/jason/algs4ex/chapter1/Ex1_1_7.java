@@ -36,11 +36,9 @@ public class Ex1_1_7 {
 
         int sum1 = 0;
         int N = 5;
-        for (int i = 1; i < 1000; i *= 2) {
-            StdOut.println(i);
+        for (int i = 1; i < 1000; i *= 2)
             for (int j = 0; j < N; j++)
                 sum1++;
-        }
         StdOut.println(sum1);
     }
 }
