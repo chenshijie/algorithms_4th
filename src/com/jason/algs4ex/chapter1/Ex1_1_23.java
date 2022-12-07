@@ -13,7 +13,7 @@ numbers that are in the whitelist
  */
 public class Ex1_1_23 {
     public static void main(String[] args) {
-        StdOut.println("Ex1_1_22");
+        StdOut.println("Ex1_1_23");
         int[] whitelist = In.readInts(args[0]);
         String filter = "+";
         if (args[1].equals("-")) {
