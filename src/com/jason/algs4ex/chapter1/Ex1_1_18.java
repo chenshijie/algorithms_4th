@@ -16,7 +16,7 @@ replace + with * and replace return 0 with return 1
  */
 public class Ex1_1_18 {
     public static void main(String[] args) {
-        StdOut.println("Ex1_1_17");
+        StdOut.println("Ex1_1_18");
         StdOut.println(mystery(2, 25));
 
         StdOut.println(mystery2(2, 5));
