@@ -16,6 +16,7 @@ and then, with probability p for each pair of points, draws a gray line connecti
 public class Ex1_1_31 {
 
     public static void main(String[] args) {
+        System.out.println("Ex1_1_31");
         StdOut.println("Please input an integer value:");
         int N = StdIn.readInt();
         StdOut.println("Please input a double value (between 0 and 1):");
