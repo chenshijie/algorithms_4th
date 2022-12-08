@@ -1,8 +1,7 @@
 package com.jason.algs4ex.chapter1;
 
 import edu.princeton.cs.algs4.StdOut;
-
-import java.util.Random;
+import edu.princeton.cs.algs4.StdRandom;
 
 /*
 1.1.15 Write a static method histogram() that takes an array a[] of int values and
@@ -31,9 +30,10 @@ public class Ex1_1_15 {
 
     public static int[] initIntArray(int length, int bound) {
         int[] a = new int[length];
-        Random random = new Random();
+        //Random random = new Random();
         for (int i = 0; i < length; i++) {
-            a[i] = random.nextInt(0, bound);
+            //a[i] = random.nextInt(0, bound);
+            a[i] = StdRandom.uniformInt(0, bound);
         }
         return a;
     }
