@@ -17,14 +17,26 @@ public class Rational {
 
     public Rational(long numerator, long denominator) {
         //判断分母是不是0
-        if (denominator == 0) {
-            throw new IllegalArgumentException("denominator can not be 0");
-        }
+
+        assert denominator != 0 : "denominator is zero.";
+
         long gcdValue = gcd(Math.abs(numerator), Math.abs(denominator));
         if (gcdValue != 1) {
             numerator /= gcdValue;
             denominator /= gcdValue;
         }
+        if (denominator < 0) {
+            numerator = -numerator;
+            denominator = -denominator;
+        }
+
+        if (Math.abs(numerator) > Integer.MAX_VALUE || Math.abs(denominator) > Integer.MAX_VALUE) {
+            throw new RuntimeException("Overflow error.");
+        }
+
+        assert Math.abs(numerator) < Integer.MAX_VALUE : "numerator is overflow";
+        assert Math.abs(denominator) < Integer.MAX_VALUE : "denominator is overflow";
+
         this.numerator = numerator;
         this.denominator = denominator;
     }
@@ -36,8 +48,7 @@ public class Rational {
     }
 
     public Rational plus(Rational b) {
-        return new Rational(this.numerator * b.denominator + b.numerator * this.denominator,
-                this.denominator * b.denominator);
+        return new Rational(this.numerator * b.denominator + b.numerator * this.denominator, this.denominator * b.denominator);
     }
 
     public Rational minus(Rational b) {
