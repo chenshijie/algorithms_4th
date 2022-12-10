@@ -6,6 +6,8 @@ import edu.princeton.cs.algs4.StdRandom;
 
 public class Accumulator {
     protected int count = 0;
+    protected double mean;
+    protected double s;
     protected double total = 0;
 
     public static void main(String[] args) {
@@ -17,8 +19,8 @@ public class Accumulator {
         StdOut.println(a);
     }
 
-    double mean() {
-        return this.total / this.count;
+    public double mean() {
+        return this.mean;
     }
 
     @Override
@@ -29,5 +31,16 @@ public class Accumulator {
     public void addDataValue(double val) {
         count++;
         total += val;
+        double delta = val - mean;
+        mean += delta / count;
+        s += (double) (count - 1) / count * delta * delta;
+    }
+
+    public double var() {
+        return s / (count - 1);
+    }
+
+    public double stddev() {
+        return Math.sqrt(this.var());
     }
 }
