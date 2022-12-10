@@ -1,23 +1,27 @@
 package com.jason.algs4ex.chapter1;
 
-import com.jason.algs4ex.Accumulator;
-import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.StdRandom;
 
 /*
-1.2.17 Robust implementation of rational numbers. Use assertions to develop an implementation
-of Rational (see Exercise 1.2.16) that is immune to overflow..
+1.2.19 Parsing. Develop the parse constructors for your Date and Transaction implementations
+of Exercise 1.2.13 that take a single String argument to specify the
+initialization values, using the formats given in the table below.
+Partial solution:
+public Date(String date)
+{
+String[] fields = date.split("/");
+month = Integer.parseInt(fields[0]);
+day = Integer.parseInt(fields[1]);
+year = Integer.parseInt(fields[2]);
+}
+
+type format example
+Date integers separated by slashes 5/22/1939
+Transaction customer, date, and amount,
+separated by whitespace Turing 5/22/1939 11.99
  */
 public class Ex1_2_19 {
     public static void main(String[] args) {
-        int T = StdIn.readInt();
-        Accumulator a = new Accumulator();
-        for (int i = 0; i < T; i++) {
-            a.addDataValue(StdRandom.uniformDouble());
-        }
-        StdOut.println(a);
-        StdOut.println(a.var());
-        StdOut.println(a.stddev());
+        StdOut.println("参考Ex1_2_13");
     }
 }
