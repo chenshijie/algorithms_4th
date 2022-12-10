@@ -3,6 +3,9 @@ package com.jason.algs4ex;
 public class SmartDate implements Comparable<SmartDate> {
 
     private static final int[] DAYS = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    private static final String[] WEEK_DAYS = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+
     private final int month;
     private final int day;
     private final int year;
@@ -91,5 +94,19 @@ public class SmartDate implements Comparable<SmartDate> {
     @Override
     public String toString() {
         return month + "/" + day + "/" + year;
+    }
+
+    public String dayOfTheWeek() {
+        //]蔡勒公式,Zeller formula
+        //W=[C/4]-2C+Y+[Y/4]+[13×(M+1)/5]+D-1，
+        //W=Y+[Y/4]+[C/4]-2C+[26×(M+1)/10]+D-1
+
+        int weekDay = year % 100 + (year % 100) / 4 + (year / 100 / 4) - 2 * (year / 100) + (26 * (month + 1)) / 10 + day - 1;
+        weekDay = weekDay % 7;
+        if (weekDay < 0) {
+            weekDay += 7;
+        }
+        return WEEK_DAYS[weekDay];
+
     }
 }
