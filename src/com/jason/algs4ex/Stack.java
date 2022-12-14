@@ -28,6 +28,10 @@ public class Stack<Item> implements Iterable<Item> {
         return this.number;
     }
 
+    public int arraySize() {
+        return stack.length;
+    }
+
     public void push(Item item) {
         if (isFull()) {
             resize(2 * stack.length);
