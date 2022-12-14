@@ -40,18 +40,20 @@ public class Ex1_3_3 {
     }
 
     public static void main(String[] args) {
+        //存储9~0
         Stack<Integer> s1 = new Stack<>(10);
         for (int i = 9; i >= 0; i--) {
             s1.push(i);
         }
 
-
+        //结果
         //String s = "4 3 2 1 0 9 8 7 6 5";
         String s = StdIn.readLine();
         List<Integer> l = Arrays.stream(s.split("\\s")).map(Integer::parseInt).toList();
         StdOut.println(l.toString());
-
+        //将S1中的数字pop然后push到S2
         Stack<Integer> s2 = new Stack<>(10);
+        //将S2中的数字pop然后push到S3，如果S3的数字顺序与l中的一致，说明可达成
         Stack<Integer> s3 = new Stack<>(10);
         for (int i = 0; i < l.size(); i++) {
             int t = l.get(i);
