@@ -62,6 +62,14 @@ public class Stack<Item> implements Iterable<Item> {
         return Arrays.toString(Arrays.copyOf(stack, number));
     }
 
+    public static Stack<String> copy(Stack<String> stack) {
+        Stack<String> result = new Stack<>(stack.size());
+        for (String s : stack) {
+            result.push(s);
+        }
+        return result;
+    }
+
     /**
      * Returns an iterator over elements of type {@code T}.
      *
@@ -69,20 +77,20 @@ public class Stack<Item> implements Iterable<Item> {
      */
     @Override
     public Iterator<Item> iterator() {
-        return new ReverseArrayIterator();
+        return new ArrayIterator();
     }
 
-    public class ReverseArrayIterator implements Iterator<Item> {
-        private int i = number;
+    public class ArrayIterator implements Iterator<Item> {
+        private int i = 0;
 
         @Override
         public boolean hasNext() {
-            return i > 0;
+            return i < number;
         }
 
         @Override
         public Item next() {
-            return stack[--i];
+            return stack[i++];
         }
 
         @Override
