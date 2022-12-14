@@ -44,6 +44,10 @@ public class Stack<Item> implements Iterable<Item> {
         return item;
     }
 
+    public Item peek() {
+        return stack[number - 1];
+    }
+
     public void resize(int max) {
         Item[] temp = (Item[]) new Object[max];
         if (number >= 0) System.arraycopy(stack, 0, temp, 0, number);
