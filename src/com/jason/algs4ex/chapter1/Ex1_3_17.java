@@ -11,11 +11,11 @@ import java.util.Arrays;
  */
 public class Ex1_3_17 {
     public static void main(String[] args) {
-        Transaction[] a = readDates("./data/tinyBatch.txt");
+        Transaction[] a = readTransactions("./data/tinyBatch.txt");
         System.out.println(Arrays.toString(a));
     }
 
-    public static Transaction[] readDates(String name) {
+    public static Transaction[] readTransactions(String name) {
         In in = new In(name);
         Queue<Transaction> q = new Queue<>();
         while (!in.isEmpty())
