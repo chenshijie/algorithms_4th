@@ -25,13 +25,13 @@ public class Ex1_3_10 {
             if (isOperator(s)) {
                 stack.push(s);
             } else if (s.equals(")")) {
-                result.append(stack.pop());
+                result.append(stack.pop()).append(" ");
             } else if (!s.equals("(")) {
-                result.append(s);
+                result.append(s).append(" ");
             }
         }
         if (!stack.isEmpty()) {
-            result.append(stack.pop());
+            result.append(stack.pop()).append(" ");
         }
         return result.toString();
     }
@@ -51,23 +51,23 @@ public class Ex1_3_10 {
         String[] expArray = exp.trim().split("\\s");
         for (String item : expArray) {
             if (!isOperator(item) && !isBracket(item)) {
-                result.append(item);
+                result.append(item).append(" ");
             } else if (item.equals("(")) {
                 stack.push(item);
             } else if (item.equals(")")) {
                 while (!stack.isEmpty() && !stack.peek().equals("(")) {
-                    result.append(stack.pop());
+                    result.append(stack.pop()).append(" ");
                 }
                 stack.pop();
             } else {
                 while (!stack.isEmpty() && order(item) <= order(stack.peek())) {
-                    result.append(stack.pop());
+                    result.append(stack.pop()).append(" ");
                 }
                 stack.push(item);
             }
         }
         while (!stack.isEmpty()) {
-            result.append(stack.pop());
+            result.append(stack.pop()).append(" ");
         }
         return result.toString();
     }
