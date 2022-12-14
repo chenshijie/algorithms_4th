@@ -18,7 +18,6 @@ public class Ex1_3_9 {
 
     public static void main(String[] args) {
         String str1 = "1 + 2 ) * 3 - 4 ) * 5 - 6 ) ) )";
-        //System.out.println(addLeftBracket(str1));
         StdOut.println(str1);
         String[] array = str1.trim().split("\\s");
         Stack<String> ops = new Stack<>();
