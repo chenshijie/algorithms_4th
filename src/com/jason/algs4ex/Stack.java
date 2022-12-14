@@ -12,6 +12,10 @@ public class Stack<Item> implements Iterable<Item> {
         this.number = 0;
     }
 
+    public Stack() {
+        this(10);
+    }
+
     public boolean isEmpty() {
         return this.number == 0;
     }
