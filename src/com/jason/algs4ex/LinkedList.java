@@ -131,6 +131,14 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
     }
 
+    public void insertAfter(Node<Item> itemNode, Node<Item> newNode) {
+        if (itemNode == null || newNode == null) {
+            return;
+        }
+        newNode.next = itemNode.next;
+        itemNode.next = newNode;
+    }
+
     public Node<Item> findNode(int index) {
         if (isInvalidIndex(index)) {
             throw new NoSuchElementException();
@@ -189,8 +197,8 @@ public class LinkedList<Item> implements Iterable<Item> {
         return size;
     }
 
-    public Iterator<Item> iterator() {
-        return new LinkedIterator(first);
+    public Node<Item> generateNode(Item item) {
+        return new Node<>(item, null);
     }
 
     private static class Node<Item> {
@@ -202,6 +210,10 @@ public class LinkedList<Item> implements Iterable<Item> {
             this.next = next;
         }
 
+    }
+
+    public Iterator<Item> iterator() {
+        return new LinkedIterator(first);
     }
 
     private class LinkedIterator implements Iterator<Item> {
