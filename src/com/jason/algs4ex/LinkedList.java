@@ -158,6 +158,19 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
     }
 
+    public static int max(LinkedList<Integer> list) {
+        if (list.isEmpty()) {
+            return 0;
+        }
+        int max = list.getFirst();
+        for (int e : list) {
+            if (max < e) {
+                max = e;
+            }
+        }
+        return max;
+    }
+
     public void insertAfter(Node<Item> itemNode, Node<Item> newNode) {
         if (itemNode == null || newNode == null) {
             return;
