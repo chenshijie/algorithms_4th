@@ -116,6 +116,21 @@ public class LinkedList<Item> implements Iterable<Item> {
         return element;
     }
 
+    public void removeAfter(Node<Item> itemNode) {
+        if (itemNode == null || itemNode.next == null) {
+            return;
+        }
+        Node<Item> current = itemNode.next;
+        itemNode.next = null;
+
+        while (current != null) {
+            Node<Item> temp = current.next;
+            current.next = null;
+            current.item = null;
+            current = temp;
+        }
+    }
+
     public Node<Item> findNode(int index) {
         if (isInvalidIndex(index)) {
             throw new NoSuchElementException();
