@@ -270,6 +270,33 @@ public class LinkedList<Item> implements Iterable<Item> {
         return new Node<>(item, null);
     }
 
+
+    public Node<Item> reverse(Node<Item> x) {
+        Node<Item> first = x;
+        Node<Item> reverse = null;
+        while (first != null) {
+            Node<Item> second = first.next;
+            first.next = reverse;
+            reverse = first;
+            first = second;
+        }
+        return reverse;
+    }
+
+    public Node<Item> reverseRecursive(Node<Item> first) {
+        if (first == null) {
+            return null;
+        }
+        if (first.next == null) {
+            return first;
+        }
+        Node<Item> second = first.next;
+        Node<Item> rest = reverse(second);
+        second.next = first;
+        first.next = null;
+        return rest;
+    }
+
     private static class Node<Item> {
         private Item item;
         private Node<Item> next;
