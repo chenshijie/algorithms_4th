@@ -16,8 +16,21 @@ public class LinkedList<Item> implements Iterable<Item> {
 
     public LinkedList(Node<Item> first) {
         this.first = first;
-        this.last = first;
-        size = 1;
+        refresh();
+    }
+
+    public static int maxByRecursion(LinkedList<Integer> list) {
+
+        if (list.first == null)
+            return 0;
+
+        LinkedList<Integer> newList = new LinkedList<>(list.first.next);
+        int max = maxByRecursion(newList);
+
+        if (list.getFirst() > max)
+            return list.getFirst();
+        else
+            return max;
     }
 
     public boolean isEmpty() {
@@ -169,6 +182,22 @@ public class LinkedList<Item> implements Iterable<Item> {
             }
         }
         return max;
+    }
+
+    private void refresh() {
+        if (first == null) {
+            this.size = 0;
+            this.last = null;
+            return;
+        }
+        int size = 0;
+        Node<Item> current = first;
+        while (current.next != null) {
+            size++;
+            current = current.next;
+        }
+        last = current;
+        this.size = size;
     }
 
     public void insertAfter(Node<Item> itemNode, Node<Item> newNode) {
