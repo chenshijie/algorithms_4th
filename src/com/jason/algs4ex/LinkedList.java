@@ -70,6 +70,7 @@ public class LinkedList<Item> implements Iterable<Item> {
             last = null;
         }
 
+        size--;
         return element;
     }
 
@@ -92,6 +93,45 @@ public class LinkedList<Item> implements Iterable<Item> {
         return element;
     }
 
+    public Item delete(int position) {
+        int index = position - 1;
+        if (isInvalidIndex(index)) {
+            throw new NoSuchElementException();
+        }
+        if (index == 0) {
+            return removeFirst();
+        } else if (index == size - 1) {
+            return removeLast();
+        }
+
+        Node<Item> x = findNode(index - 1);
+        Node<Item> deleteNode = x.next;
+        Item element = deleteNode.item;
+        x.next = deleteNode.next;
+
+        deleteNode.item = null;
+        deleteNode.next = null;
+
+        size--;
+        return element;
+    }
+
+    public Node<Item> findNode(int index) {
+        if (isInvalidIndex(index)) {
+            throw new NoSuchElementException();
+        }
+        Node<Item> current = first;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current;
+    }
+
+    public boolean isInvalidIndex(int index) {
+        return index < 0 || index >= size;
+    }
+
+
     public Node<Item> findNodeBeforeLast() {
         Node<Item> current = first;
 
@@ -113,6 +153,10 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
 
         return sb.toString();
+    }
+
+    public int size() {
+        return size;
     }
 
     public Iterator<Item> iterator() {
