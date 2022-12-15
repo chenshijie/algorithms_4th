@@ -59,7 +59,7 @@ public class CircleLinkedListQueue<Item> implements Iterable<Item> {
      */
     @Override
     public Iterator<Item> iterator() {
-        return new ListIterator();
+        return new CircleLinkedListIterator();
     }
 
     static class Node<Item> {
@@ -67,7 +67,7 @@ public class CircleLinkedListQueue<Item> implements Iterable<Item> {
         Node<Item> next;
     }
 
-    private class ListIterator implements Iterator<Item> {
+    private class CircleLinkedListIterator implements Iterator<Item> {
         private Node<Item> current = last;
         private boolean loopEnd = false;
 
