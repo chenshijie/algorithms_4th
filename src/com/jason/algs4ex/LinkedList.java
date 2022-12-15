@@ -131,6 +131,33 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
     }
 
+    public void remove(Item item) {
+        if (first == null) {
+            return;
+        }
+        Node<Item> current = first;
+        Node<Item> pre = first;
+        while (current != null) {
+            if (current.item.equals(item)) {
+                if (current == first) {
+                    removeFirst();
+                    pre = first;
+                    current = first;
+                } else {
+                    Node<Item> next = current.next;
+                    current.next = null;
+                    current.item = null;
+                    pre.next = next;
+                    current = next;
+                    size--;
+                }
+            } else {
+                pre = current;
+                current = current.next;
+            }
+        }
+    }
+
     public void insertAfter(Node<Item> itemNode, Node<Item> newNode) {
         if (itemNode == null || newNode == null) {
             return;
