@@ -127,6 +127,21 @@ public class LinkedList<Item> implements Iterable<Item> {
         return current;
     }
 
+    public boolean find(Item item) {
+
+        Node<Item> current = first;
+        while (current != null) {
+            if (current.item.equals(item)) {
+                return true;
+            }
+            if (current == last) {
+                return false;
+            }
+            current = current.next;
+        }
+        return false;
+    }
+
     public boolean isInvalidIndex(int index) {
         return index < 0 || index >= size;
     }
