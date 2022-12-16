@@ -1,6 +1,7 @@
 package com.jason.algs4ex.chapter1;
 
 import com.jason.algs4ex.GeneralizedQueue;
+import com.jason.algs4ex.Queue;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 
@@ -22,6 +23,7 @@ of the number of items in the queue—see Exercise 3.5.27.
  */
 public class Ex1_3_38 {
     public static void main(String[] args) {
+        StdOut.println("Example for GeneralizedQueue that uses an array implementation");
         GeneralizedQueue<Integer> queue = new GeneralizedQueue<>();
         for (int i = 0; i < 10; i++) {
             queue.insert(i);
@@ -29,13 +31,29 @@ public class Ex1_3_38 {
         StdOut.println(queue);
 
         while (!queue.isEmpty()) {
-            int k = 1;
-            if (queue.size() > 1) {
-                k = StdRandom.uniformInt(1, queue.size());
-            }
+            int k = StdRandom.uniformInt(1, queue.size() + 1);
             StdOut.println("delete(" + k + "):" + queue.delete(k));
             StdOut.println(queue);
             StdOut.println();
         }
+
+        StdOut.println("Example for GeneralizedQueue which uses a linked-list implementation");
+        Queue<Integer> q = new Queue<>();
+        for (int i = 0; i < 10; i++) {
+            q.enqueue(i);
+        }
+        for (int i : q) {
+            StdOut.print(i + " ");
+        }
+        StdOut.println();
+        while (!q.isEmpty()) {
+            int k = StdRandom.uniformInt(1, q.size() + 1);
+            StdOut.println("delete(" + k + "):" + q.delete(k));
+            for (int i : q) {
+                StdOut.print(i + " ");
+            }
+            StdOut.println();
+        }
+
     }
 }

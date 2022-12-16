@@ -1,6 +1,7 @@
 package com.jason.algs4ex;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Queue<Item> implements Iterable<Item> {
     private Node first;
@@ -39,6 +40,37 @@ public class Queue<Item> implements Iterable<Item> {
         }
         N--;
         return item;
+    }
+
+    public Item delete(int k) {
+        if (k < 1 && k > N) {
+            throw new NoSuchElementException();
+        }
+        if (k == 1) {
+            return dequeue();
+        } else {
+            Node prev = first;
+            Node current = first.next;
+
+            for (int i = 1; i < N; i++) {
+                if (i == k - 1) {
+                    break;
+                }
+                prev = current;
+                current = current.next;
+            }
+
+            if (last == current) {
+                last = prev;
+            }
+            Item item = current.item;
+            prev.next = current.next;
+
+            current.item = null;
+            current.next = null;
+            N--;
+            return item;
+        }
     }
 
     public int size() {
