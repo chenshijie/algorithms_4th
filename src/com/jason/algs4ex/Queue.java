@@ -15,6 +15,12 @@ public class Queue<Item> implements Iterable<Item> {
         N = 0;
     }
 
+    public Queue(Queue<Item> queue) {
+        for (Item item : queue) {
+            enqueue(item);
+        }
+    }
+
     public boolean isEmpty() {
         return first == null;
     }
@@ -71,6 +77,15 @@ public class Queue<Item> implements Iterable<Item> {
             N--;
             return item;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Item item : this) {
+            sb.append(item).append(" ");
+        }
+        return sb.toString();
     }
 
     public int size() {
