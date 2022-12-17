@@ -7,9 +7,12 @@ public class Stack<Item> implements Iterable<Item> {
     private Item[] stack;
     private int number;
 
+    private int operationCount;
+
     public Stack(int cap) {
         this.stack = (Item[]) new Object[cap];
         this.number = 0;
+        this.operationCount = 0;
     }
 
     public Stack() {
@@ -37,6 +40,7 @@ public class Stack<Item> implements Iterable<Item> {
             resize(2 * stack.length);
         }
         this.stack[number++] = item;
+        operationCount++;
     }
 
     public Item pop() {
@@ -45,6 +49,7 @@ public class Stack<Item> implements Iterable<Item> {
         if (number > 0 && number == stack.length / 4) {
             resize(stack.length / 2);
         }
+        operationCount++;
         return item;
     }
 
@@ -82,6 +87,11 @@ public class Stack<Item> implements Iterable<Item> {
 
     public class ArrayIterator implements Iterator<Item> {
         private int i = 0;
+        private int originalOperationCount;
+
+        public ArrayIterator() {
+            originalOperationCount = operationCount;
+        }
 
         @Override
         public boolean hasNext() {
@@ -90,6 +100,9 @@ public class Stack<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
+            if (originalOperationCount != operationCount) {
+                throw new java.util.ConcurrentModificationException();
+            }
             return stack[i++];
         }
 
