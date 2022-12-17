@@ -44,6 +44,9 @@ public class Stack<Item> implements Iterable<Item> {
     }
 
     public Item pop() {
+        if (isEmpty()) {
+            return null;
+        }
         Item item = stack[--number];
         stack[number] = null;
         if (number > 0 && number == stack.length / 4) {
@@ -71,6 +74,14 @@ public class Stack<Item> implements Iterable<Item> {
         Stack<String> result = new Stack<>(stack.size());
         for (String s : stack) {
             result.push(s);
+        }
+        return result;
+    }
+
+    public Stack<Item> copy() {
+        Stack<Item> result = new Stack<>(size());
+        for (Item item : this) {
+            result.push(item);
         }
         return result;
     }
