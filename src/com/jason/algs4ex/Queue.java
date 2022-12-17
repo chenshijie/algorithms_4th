@@ -92,6 +92,12 @@ public class Queue<Item> implements Iterable<Item> {
         return N;
     }
 
+    public void catenate(Queue<Item> queue) {
+        for (Item item : queue) {
+            enqueue(item);
+        }
+    }
+
     /**
      * Returns an iterator over elements of type {@code T}.
      *
