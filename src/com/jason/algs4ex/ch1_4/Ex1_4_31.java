@@ -7,8 +7,7 @@ import edu.princeton.cs.algs4.StdOut;
 1.4.31 Deque with three stacks. Implement a deque with three stacks so that each
 deque operation takes a constant amortized number of stack operations.
 
-1.4.31 Deque with three stacks. Implement a deque with three stacks so that each
-deque operation takes a constant amortized number of stack operations.
+1.4.31 三个栈实现的双向队列。使用三个栈实现一个双向队列，使得双向队列的每个操作所需的栈操作均摊后为一个常数。
 */
 public class Ex1_4_31 {
 
