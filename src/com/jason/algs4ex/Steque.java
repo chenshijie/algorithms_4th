@@ -27,8 +27,14 @@ public class Steque<Item> implements Iterable<Item> {
         Node<Item> oldLast = last;
         Item element = oldLast.item;
         last = oldLast.prev;
-        last.next = null;
+        if (last != null) {
+            last.next = null;
+        }
         oldLast.setNull();
+        if (oldLast == first) {
+            first = null;
+        }
+        N--;
         return element;
     }
 
