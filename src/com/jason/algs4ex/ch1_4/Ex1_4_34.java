@@ -21,7 +21,7 @@ public class Ex1_4_34 {
         int N = 1000;
         GuessGame game = new GuessGame(100, N);
 
-        //方案1，二分查找
+        //方案1，二分查找, 每次循环分别判断secretNumber更靠近左边界还是右边界，然后确定新的左右边界
         int low = 1;
         int high = game.getMax();
         while (low <= high) {
@@ -46,11 +46,13 @@ public class Ex1_4_34 {
 
         game.reStart();
 
-        //方案2，每次都猜前两次的中间值
+        //方案2，二分查找的优化，每次循环不在判断两次，二是判断一次
+        //区间收敛后的中间值记为mid，在与上一次lastGuessNumber相反的方向上取一个数值guessNumber，与另一个方向上的上一次猜测值等距
+        //这样可以判断出secret出现在新区间的左半边还是右半边
         low = 1;
         high = game.getMax();
         boolean checkLeftSide = true;
-        int guessNumber = 1;
+        int guessNumber = 1; //第一次猜左边界low
         while (low < high) {
             int mid = low + (high - low) / 2;
             if (game.getGuessCount() != 0) {
@@ -62,43 +64,38 @@ public class Ex1_4_34 {
             }
             int lastGuessNumber = game.getLastGuessNumber();
             GuessResult guessResult = game.guess(guessNumber);
+            checkLeftSide = !checkLeftSide;
             if (guessResult == GuessResult.equal) {
                 StdOut.println("SUCCESS:" + guessNumber);
                 break;
             } else {
                 if (game.getGuessCount() == 1) {
-                    checkLeftSide = false;
                     continue;
                 }
                 if (guessResult == GuessResult.hot) {
                     if (lastGuessNumber > guessNumber) {
                         high = mid;
-                        checkLeftSide = false;
                     } else {
                         low = mid;
-                        checkLeftSide = true;
                     }
                 } else {
                     if (lastGuessNumber < guessNumber) {
                         high = mid;
-                        checkLeftSide = true;
                     } else {
-                        checkLeftSide = false;
                         low = mid;
                     }
                 }
             }
+            //low 与 high相差1时，无法进一步循环, 猜出正确数值后退出
             if (high - low == 1) {
+                if (game.guess(low) == GuessResult.equal) {
+                    StdOut.println("SUCCESS:" + low);
+                } else if (game.guess(high) == GuessResult.equal) {
+                    StdOut.println("SUCCESS:" + high);
+                }
                 break;
             }
 
-        }
-        if (high - low == 1) {
-            if (game.guess(low) == GuessResult.equal) {
-                StdOut.println("SUCCESS:" + low);
-            } else if (game.guess(high) == GuessResult.equal) {
-                StdOut.println("SUCCESS:" + high);
-            }
         }
 
         StdOut.printf("secret num: %d, guess count: %d\n", game.getSecret(), game.guessCount);
