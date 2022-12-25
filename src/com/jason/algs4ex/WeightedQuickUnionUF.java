@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class WeightedQuickUnionUF extends UF {
 
-    private int[] sz;
+    protected int[] sz;
 
     public WeightedQuickUnionUF(int N) {
         super(N);
