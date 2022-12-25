@@ -1,6 +1,6 @@
 package com.jason.algs4ex.ch1_5;
 
-import com.jason.algs4ex.WeightedQuickUnionUF;
+import com.jason.algs4ex.QuickUnionUF;
 
 /*
 1.5.12 使用路径压缩的quick-union算法。根据路径压缩修改quick-union算法（请见1.5.2.3节），
@@ -13,7 +13,7 @@ public class Ex1_5_12 {
         QuickUnionPathCompressionUF.main(args);
     }
 
-    public static class QuickUnionPathCompressionUF extends WeightedQuickUnionUF {
+    public static class QuickUnionPathCompressionUF extends QuickUnionUF {
         public QuickUnionPathCompressionUF(int N) {
             super(N);
         }
