@@ -16,4 +16,12 @@ public class Connection {
                 ", q=" + q +
                 '}';
     }
+
+    public int getP() {
+        return p;
+    }
+
+    public int getQ() {
+        return q;
+    }
 }
