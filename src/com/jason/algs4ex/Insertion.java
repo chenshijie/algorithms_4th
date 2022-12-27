@@ -10,6 +10,16 @@ public class Insertion extends BaseSort {
             for (j = i; j > 0 && less(a[j], a[j - 1]); j--) {
                 exch(a, j, j - 1);
             }
+        }
+    }
+
+    public static void sortAndPrint(Comparable[] a) {  // 将a[]按升序排列
+        int N = a.length;
+        for (int i = 1; i < N; i++) {  // 将a[i] 插入到a[i-1]、a[i-2]、a[i-3]..．之中
+            int j;
+            for (j = i; j > 0 && less(a[j], a[j - 1]); j--) {
+                exch(a, j, j - 1);
+            }
             formatShow(i, j, a);
         }
     }
@@ -30,7 +40,7 @@ public class Insertion extends BaseSort {
         StdOut.print(" \t");
         StdOut.print(" \t");
         show(a, "\t");
-        sort(a);
+        sortAndPrint(a);
         assert isSorted(a);
         //StdOut.println("-----------------------------------");
         StdOut.print(" \t");

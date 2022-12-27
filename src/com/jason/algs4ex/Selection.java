@@ -13,6 +13,19 @@ public abstract class Selection extends BaseSort {
                     min = j;
                 }
             }
+            exch(a, i, min);
+        }
+    }
+
+    public static void sortAndPrint(Comparable[] a) {
+        int N = a.length;
+        for (int i = 0; i < N; i++) {
+            int min = i;
+            for (int j = i + i; j < N; j++) {
+                if (less(a[j], a[min])) {
+                    min = j;
+                }
+            }
             formatShow(i, min, a);
             exch(a, i, min);
         }
@@ -34,7 +47,7 @@ public abstract class Selection extends BaseSort {
         StdOut.print(" \t");
         StdOut.print(" \t");
         show(a, "\t");
-        sort(a);
+        sortAndPrint(a);
         assert isSorted(a);
         //StdOut.println("-----------------------------------");
         StdOut.print(" \t");
