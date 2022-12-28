@@ -1,5 +1,6 @@
 package com.jason.algs4ex;
 
+import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 public class Insertion extends BaseSort {
@@ -26,8 +27,8 @@ public class Insertion extends BaseSort {
 
     public static void main(String[] args) {
         //S O R T E X A M P L E
-        String[] a = {"S", "O", "R", "T", "E", "X", "A", "M", "P", "L", "E"};
-        //String[] a = StdIn.readAllStrings();
+        //String[] a = {"S", "O", "R", "T", "E", "X", "A", "M", "P", "L", "E"};
+        String[] a = StdIn.readAllStrings();
         String[] index = new String[a.length + 2];
         index[0] = "i";
         index[1] = "j";
