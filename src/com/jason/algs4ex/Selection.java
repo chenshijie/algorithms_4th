@@ -3,6 +3,8 @@ package com.jason.algs4ex;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.util.Comparator;
+
 public abstract class Selection extends BaseSort {
     public static void sort(Comparable[] a) {
         int N = a.length;
@@ -10,6 +12,19 @@ public abstract class Selection extends BaseSort {
             int min = i;
             for (int j = i + 1; j < N; j++) {
                 if (less(a[j], a[min])) {
+                    min = j;
+                }
+            }
+            exch(a, i, min);
+        }
+    }
+
+    public static void sort(Comparable[] a, Comparator c) {
+        int N = a.length;
+        for (int i = 0; i < N; i++) {
+            int min = i;
+            for (int j = i + 1; j < N; j++) {
+                if (c.compare(a[j], a[min]) < 0) {
                     min = j;
                 }
             }

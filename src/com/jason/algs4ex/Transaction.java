@@ -2,6 +2,8 @@ package com.jason.algs4ex;
 
 import edu.princeton.cs.algs4.StdOut;
 
+import java.util.Comparator;
+
 public class Transaction implements Comparable<Transaction> {
     private final String who;
     private final Date when;
@@ -79,5 +81,12 @@ public class Transaction implements Comparable<Transaction> {
     @Override
     public String toString() {
         return String.format("%s\t%s\t%.3f", who, when, amount);
+    }
+
+    public static class WhenComparator implements Comparator<Transaction> {
+        @Override
+        public int compare(Transaction t1, Transaction t2) {
+            return t1.when().compareTo(t2.when());
+        }
     }
 }

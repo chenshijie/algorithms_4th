@@ -1,5 +1,8 @@
 package com.jason.algs4ex.ch2_1;
 
+import com.jason.algs4ex.Selection;
+import com.jason.algs4ex.Transaction;
+import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 /*
@@ -9,6 +12,17 @@ import edu.princeton.cs.algs4.StdOut;
 public class Ex2_1_22 {
 
     public static void main(String[] args) {
-        StdOut.println("See Ex2_1_21");
+        String[] lines = StdIn.readAllLines();
+        Transaction[] transactions = new Transaction[lines.length];
+        for (int i = 0; i < lines.length; i++) {
+            transactions[i] = new Transaction(lines[i]);
+        }
+
+        Transaction.WhenComparator comparator = new Transaction.WhenComparator();
+        Selection.sort(transactions, comparator);
+
+        for (Transaction t : transactions) {
+            StdOut.println(t);
+        }
     }
 }
