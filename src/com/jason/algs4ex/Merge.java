@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.StdOut;
 import java.util.Arrays;
 
 public class Merge extends BaseSort {
-    private static Comparable[] aux;       // 归并所需的辅助数组
+    protected static Comparable[] aux;       // 归并所需的辅助数组
 
     private static boolean showTrace = false;
 
