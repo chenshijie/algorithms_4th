@@ -8,8 +8,9 @@ import com.jason.algs4ex.Merge;
 public class Ex2_2_1 {
     public static void main(String[] args) {
         String s = "A E Q S U Y E I N O S T";
+        //String s = "E E G M R A C E R T";
         String[] a = s.split("\\s");
-        Merge.showTrace(true);
+        Merge.showLastMergeTrace(true);
         Merge.sort(a);
     }
 }

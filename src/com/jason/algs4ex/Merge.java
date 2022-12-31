@@ -8,9 +8,14 @@ public class Merge extends BaseSort {
     protected static Comparable[] aux;       // 归并所需的辅助数组
 
     private static boolean showTrace = false;
+    private static boolean showLastMergeTrace = false;
 
     public static void showTrace(boolean showTrace) {
         Merge.showTrace = showTrace;
+    }
+
+    public static void showLastMergeTrace(boolean showLastMergeTrace) {
+        Merge.showLastMergeTrace = showLastMergeTrace;
     }
 
     public static void sort(Comparable[] a) {
@@ -66,11 +71,64 @@ public class Merge extends BaseSort {
         StdOut.println(sb2);
     }
 
+    private static void printMergeTraceHeader(Comparable[] a, int mid) {
+        StringBuilder sb1 = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
+        StringBuilder sb3 = new StringBuilder();
+        StringBuilder sb4 = new StringBuilder();
+        //sb1.append("k  ");
+        sb1.append(String.format("%3s  ", "k"));
+        sb2.append("     ");
+        sb3.append("     ");
+        sb4.append("     ");
+        for (int i = 0; i < a.length; i++) {
+            sb1.append(String.format("%4d", i));
+            sb2.append("----");
+            if (i == mid + 1) {
+                sb3.append(String.format(" |%2s", a[i]));
+                sb4.append(String.format(" |%2s", a[i]));
+            } else {
+                sb3.append(String.format("%4s", a[i]));
+                sb4.append(String.format("%4s", a[i]));
+            }
+
+        }
+        sb1.append("  i  j  ");
+        sb1.append(String.format("%3s%3s  ", "i", "j"));
+        sb2.append("        ");
+        sb3.append("        ");
+        sb4.append("        ");
+        for (int i = 0; i < a.length; i++) {
+            sb1.append(String.format("%4d", i));
+            sb2.append("----");
+
+            if (i == mid + 1) {
+                sb3.append(String.format(" |%2s", "-"));
+                sb4.append(String.format(" |%2s", a[i]));
+            } else {
+                sb3.append(String.format("%4s", "-"));
+                sb4.append(String.format("%4s", a[i]));
+            }
+        }
+
+        StdOut.println(sb1);
+        StdOut.println(sb2);
+        StdOut.println(sb3);
+        StdOut.println(sb4);
+    }
+
     public static void merge(Comparable[] a, int lo, int mid, int hi) {  // 将a[lo..mid] 和a[mid+1..hi] 归并
+        boolean isLastMerge = false;
+        if (showLastMergeTrace && lo == 0 && hi == a.length - 1) {
+            isLastMerge = true;
+            printMergeTraceHeader(a, mid);
+        }
         int i = lo, j = mid + 1;
         for (int k = lo; k <= hi; k++)  // 将a[lo..hi]复制到aux[lo..hi]
             aux[k] = a[k];
         for (int k = lo; k <= hi; k++) { // 归并回到a[lo..hi]
+            int pi = i;
+            int pj = j;
             if (i > mid) {
                 a[k] = aux[j++];
             } else if (j > hi) {
@@ -80,10 +138,54 @@ public class Merge extends BaseSort {
             } else {
                 a[k] = aux[i++];
             }
+            if (isLastMerge) {
+                printMergeTrace(a, k, pi, pj, mid, aux);
+            }
         }
         if (showTrace) {
             printTrace(a, lo, mid, hi);
         }
+    }
+
+    public static void printMergeTrace(Comparable[] a, int k, int i, int j, int mid, Comparable[] aux) {
+        StringBuilder sb1 = new StringBuilder();
+        //sb1.append(k).append("  ");
+        sb1.append(String.format("%3d  ", k));
+        for (int n = 0; n <= k; n++) {
+            if (n == k) {
+                sb1.append(String.format("\033[%d;%dm%4s\033[0m", 31, 2, a[n]));
+            } else {
+                sb1.append(String.format("\033[%d;%dm%4s\033[0m", 37, 2, a[n]));
+            }
+        }
+        for (int n = 0; n < a.length - k - 1; n++) {
+            sb1.append(String.format("%4s", " "));
+        }
+        sb1.append(String.format("%3d%3d  ", i, j));
+        for (int n = 0; n <= mid; n++) {
+            if (n < i) {
+                sb1.append(String.format("%4s", " "));
+            } else {
+                if (n == i) {
+                    sb1.append(String.format("\033[%d;%dm%4s\033[0m", 31, 2, aux[n]));
+                } else {
+                    sb1.append(String.format("\033[%d;%dm%4s\033[0m", 37, 2, aux[n]));
+                }
+            }
+        }
+
+        for (int n = mid + 1; n < a.length; n++) {
+            if (n < j) {
+                sb1.append(String.format("%4s", " "));
+            } else {
+                if (n == j) {
+                    sb1.append(String.format("\033[%d;%dm%4s\033[0m", 31, 2, aux[n]));
+                } else {
+                    sb1.append(String.format("\033[%d;%dm%4s\033[0m", 37, 2, aux[n]));
+                }
+            }
+        }
+        StdOut.println(sb1);
     }
 
     public static void main(String[] args) {
