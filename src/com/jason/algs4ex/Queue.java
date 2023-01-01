@@ -48,6 +48,13 @@ public class Queue<Item> implements Iterable<Item> {
         return item;
     }
 
+    public Item peek() {
+        if (isEmpty()) {
+            return null;
+        }
+        return first.item;
+    }
+
     public Item delete(int k) {
         if (k < 1 && k > N) {
             throw new NoSuchElementException();
