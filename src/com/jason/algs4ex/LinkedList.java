@@ -37,10 +37,7 @@ public class LinkedList<Item> implements Iterable<Item> {
         return first == null;
     }
 
-    public void addFirst(Item item) {
-        this.first = new Node<>(item, this.first);
-        size++;
-    }
+    private static int mergeTimes = 0;
 
     public void addLast(Item item) {
         Node<Item> newNode = new Node<>(item, null);
@@ -296,6 +293,75 @@ public class LinkedList<Item> implements Iterable<Item> {
         first.next = null;
         return rest;
     }
+
+    //sort
+    public static <T> void sort(LinkedList<Comparable<T>> list) {
+        Node<Comparable<T>> mid = findSortedSubList(list.first);
+        Node<Comparable<T>> hi = mid;
+
+        while (mid.next != null && hi != list.last) {
+            hi = findSortedSubList(mid.next);
+            merge(list, mid, hi);
+            if (less(mid.item, hi.item)) {
+                mid = hi;
+            }
+            if (mergeTimes > 10) {
+                break;
+            }
+        }
+    }
+
+    private static <T> boolean less(Comparable<T> v, Comparable<T> w) {
+        return v.compareTo((T) w) < 0;
+    }
+
+    public static <T> void merge(LinkedList<Comparable<T>> list, Node<Comparable<T>> mid, Node<Comparable<T>> hi) {
+        mergeTimes++;
+        Node<Comparable<T>> current = list.first;
+        Node<Comparable<T>> pre = null;
+
+        //左侧所有元素全部都判断完成退出循环
+        while (current != mid.next) {
+            //当前元素比中间下一个元素小，游标下移
+            if (less(current.item, mid.next.item)) {
+                pre = current;
+                current = current.next;
+                continue;
+            }
+            //当前元素比中间下一个元素大，将其插入到当前元素之前，点前元素是first时需要重置first
+            Node<Comparable<T>> t = mid.next;
+            mid.next = t.next;
+            if (current == list.first) {
+                t.next = current;
+                list.first = t;
+            } else {
+                pre.next = t;
+                t.next = current;
+            }
+            //右侧最大元素被移动后退出
+            if (t == hi) {
+                break;
+            }
+            pre = t;
+        }
+    }
+
+    public static <T> Node<Comparable<T>> findSortedSubList(Node<Comparable<T>> start) {
+        Node<Comparable<T>> current = start;
+        while (current != null && current.next != null && current.item.compareTo((T) current.next.item) < 0) {
+            current = current.next;
+        }
+        return current;
+    }
+
+    public void addFirst(Item item) {
+        this.first = new Node<>(item, this.first);
+        if (last == null) {
+            last = first;
+        }
+        size++;
+    }
+    //sort end
 
     private static class Node<Item> {
         private Item item;
