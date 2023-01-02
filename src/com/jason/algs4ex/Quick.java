@@ -11,7 +11,7 @@ public class Quick {
         sort(a, 0, a.length - 1);
     }
 
-    private static <T extends Comparable<T>> void sort(T[] a, int lo, int hi) {
+    protected static <T extends Comparable<T>> void sort(T[] a, int lo, int hi) {
         if (hi <= lo) {
             return;
         }
@@ -20,11 +20,11 @@ public class Quick {
         sort(a, j + 1, hi);
     }
 
-    private static <T extends Comparable<T>> boolean less(T a, T b) {
+    protected static <T extends Comparable<T>> boolean less(T a, T b) {
         return a.compareTo(b) < 0;
     }
 
-    private static <T extends Comparable<T>> void exchange(T[] a, int x, int y) {
+    protected static <T extends Comparable<T>> void exchange(T[] a, int x, int y) {
         T t = a[x];
         a[x] = a[y];
         a[y] = t;
