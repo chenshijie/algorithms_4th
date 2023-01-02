@@ -26,6 +26,8 @@ public class Ex2_3_7 {
         private static int subArrayWithLength1Count = 0;
         private static int subArrayWithLength2Count = 0;
 
+        private static int CompareCount = 0;
+
         public static int getSubArrayWithLength0Count() {
             return subArrayWithLength0Count;
         }
@@ -58,7 +60,12 @@ public class Ex2_3_7 {
             sort(a, j + 1, hi);
         }
 
+        public static int getCompareCount() {
+            return CompareCount;
+        }
+
         protected static <T extends Comparable<T>> boolean less(T a, T b) {
+            CompareCount++;
             return a.compareTo(b) < 0;
         }
 
