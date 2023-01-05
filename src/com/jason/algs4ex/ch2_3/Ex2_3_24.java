@@ -23,12 +23,6 @@ public class Ex2_3_24 {
     public static class SampleSort extends Quick {
         public static int K = 4;
 
-        private static <T> void exch(T[] a, int i, int j) {
-            T swap = a[i];
-            a[i] = a[j];
-            a[j] = swap;
-        }
-
         public static <T extends Comparable<T>> void sort(T[] a) {
             if (a.length < Math.pow(2, K + 1)) {
                 // 小于 2^(k+1) 的数组直接进行快排
@@ -45,14 +39,15 @@ public class Ex2_3_24 {
             // 将取样数组后半部分放到数组末尾
             int i = samplehi, j = a.length - 1;
             while (i != sampleMedian && i >= 0)
-                exch(a, i--, j--);
+                exchange(a, i--, j--);
             // 根据取样数组进行排序
             SampleSort.sort(a, 0, sampleMedian, j, a.length - 1);
         }
 
         private static <T extends Comparable<T>> void sort(T[] a, int samplelo, int lo, int hi, int samplehi) {
-            if (hi <= lo)                   // 别越界
+            if (hi <= lo) {
                 return;
+            }
 
             int j = partition(a, lo, hi);
             // 将前部的有序取样数组取半，后半部分放在枢轴前面。
@@ -61,7 +56,7 @@ public class Ex2_3_24 {
                 // v 应该始终指向有序部分的前面一项
                 int p = lo - 1, v = j - 1;
                 for (int i = 0; i < (lo - samplelo) / 2; i++) {
-                    exch(a, p--, v--);
+                    exchange(a, p--, v--);
                 }
                 sort(a, samplelo, p, v, j - 1);
             } else {
@@ -75,7 +70,7 @@ public class Ex2_3_24 {
                 // v 应该始终指向有序部分的最后一项
                 int p = hi, v = j;
                 for (int i = 0; i < (samplehi - hi) / 2; i++) {
-                    exch(a, ++p, ++v);
+                    exchange(a, ++p, ++v);
                 }
                 sort(a, j + 1, v, p, samplehi);
             } else {
