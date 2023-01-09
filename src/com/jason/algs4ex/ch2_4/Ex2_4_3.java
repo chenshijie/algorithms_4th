@@ -19,13 +19,23 @@ public class Ex2_4_3 {
         StdOut.println();
     }
 
-    public static class UnorderedArrayMaxPQ<T extends Comparable<T>> {
-        private T[] pq;
-        private int n;         // number of elements
+    public abstract static class ArrayMaxPQ<T extends Comparable<T>> {
+        protected T[] pq;
+        protected int n;
 
-        public UnorderedArrayMaxPQ(int initCapacity) {
+        public ArrayMaxPQ(int initCapacity) {
             pq = (T[]) new Comparable[initCapacity];
             n = 0;
+        }
+
+        protected boolean less(int i, int j) {
+            return pq[i].compareTo(pq[j]) < 0;
+        }
+
+        protected void exch(int i, int j) {
+            T swap = pq[i];
+            pq[i] = pq[j];
+            pq[j] = swap;
         }
 
         public boolean isEmpty() {
@@ -34,6 +44,17 @@ public class Ex2_4_3 {
 
         public int size() {
             return n;
+        }
+
+        public abstract void insert(T x);
+
+        public abstract T delMax();
+
+    }
+
+    public static class UnorderedArrayMaxPQ<T extends Comparable<T>> extends ArrayMaxPQ<T> {
+        public UnorderedArrayMaxPQ(int initCapacity) {
+            super(initCapacity);
         }
 
         public void insert(T x) {
@@ -47,16 +68,6 @@ public class Ex2_4_3 {
             exch(max, n - 1);
 
             return pq[--n];
-        }
-
-        private boolean less(int i, int j) {
-            return pq[i].compareTo(pq[j]) < 0;
-        }
-
-        private void exch(int i, int j) {
-            T swap = pq[i];
-            pq[i] = pq[j];
-            pq[j] = swap;
         }
     }
 }
