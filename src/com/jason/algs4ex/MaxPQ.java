@@ -150,6 +150,11 @@ public class MaxPQ<Key> implements Iterable<Key> {
         return isMaxHeapOrdered(left) && isMaxHeapOrdered(right);
     }
 
+    //for debug
+    public Key[] getHeap() {
+        return pq;
+    }
+
     public Iterator<Key> iterator() {
         return new HeapIterator();
     }
