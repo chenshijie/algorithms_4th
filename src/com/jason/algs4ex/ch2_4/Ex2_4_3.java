@@ -9,12 +9,19 @@ import edu.princeton.cs.algs4.StdOut;
 public class Ex2_4_3 {
     public static void main(String[] args) {
         UnorderedArrayMaxPQ<String> pq = new UnorderedArrayMaxPQ<>(15);
+        OrderedArrayMaxPQ<String> pq2 = new OrderedArrayMaxPQ<>(15);
         String[] a = "EX2.4.3TEST".split("");
         for (String s : a) {
             pq.insert(s);
+            pq2.insert(s);
         }
         while (!pq.isEmpty()) {
             StdOut.print(pq.delMax() + " ");
+        }
+        StdOut.println();
+
+        while (!pq2.isEmpty()) {
+            StdOut.print(pq2.delMax() + " ");
         }
         StdOut.println();
     }
@@ -28,8 +35,8 @@ public class Ex2_4_3 {
             n = 0;
         }
 
-        protected boolean less(int i, int j) {
-            return pq[i].compareTo(pq[j]) < 0;
+        protected boolean less(T v, T w) {
+            return v.compareTo(w) < 0;
         }
 
         protected void exch(int i, int j) {
@@ -52,6 +59,28 @@ public class Ex2_4_3 {
 
     }
 
+    public static class OrderedArrayMaxPQ<T extends Comparable<T>> extends ArrayMaxPQ<T> {
+        public OrderedArrayMaxPQ(int initCapacity) {
+            super(initCapacity);
+        }
+
+        public void insert(T x) {
+            int i = n - 1;
+            while (i >= 0 && less(x, pq[i])) {
+                pq[i + 1] = pq[i];
+                i--;
+            }
+            pq[i + 1] = x;
+            n++;
+        }
+
+        public T delMax() {
+
+
+            return pq[--n];
+        }
+    }
+
     public static class UnorderedArrayMaxPQ<T extends Comparable<T>> extends ArrayMaxPQ<T> {
         public UnorderedArrayMaxPQ(int initCapacity) {
             super(initCapacity);
@@ -64,7 +93,7 @@ public class Ex2_4_3 {
         public T delMax() {
             int max = 0;
             for (int i = 1; i < n; i++)
-                if (less(max, i)) max = i;
+                if (less(pq[max], pq[i])) max = i;
             exch(max, n - 1);
 
             return pq[--n];
