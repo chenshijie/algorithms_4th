@@ -91,7 +91,7 @@ public class LinkedList<Item> implements Iterable<Item> {
         Item element = last.item;
 
         Node<Item> nodeBeforeLast = findNodeBeforeLast();
-        if (nodeBeforeLast == first) {
+        if (nodeBeforeLast == first && size == 1) {
             first = null;
             last = null;
         } else {
@@ -243,8 +243,12 @@ public class LinkedList<Item> implements Iterable<Item> {
         if (itemNode == null || newNode == null) {
             return;
         }
+        if (itemNode.next == null) {
+            last = newNode;
+        }
         newNode.next = itemNode.next;
         itemNode.next = newNode;
+        size++;
     }
 
     public Node<Item> findNode(int index) {
@@ -256,6 +260,11 @@ public class LinkedList<Item> implements Iterable<Item> {
             current = current.next;
         }
         return current;
+    }
+
+    public Item getItemByIndex(int index) {
+        Node<Item> t = findNode(index);
+        return t.item;
     }
 
     public boolean find(Item item) {

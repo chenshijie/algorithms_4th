@@ -9,17 +9,19 @@ import edu.princeton.cs.algs4.StdOut;
  */
 public class Ex2_4_3 {
     public static void main(String[] args) {
-        UnorderedArrayMaxPQ<String> pq = new UnorderedArrayMaxPQ<>(15);
+        UnorderedArrayMaxPQ<String> pq1 = new UnorderedArrayMaxPQ<>(15);
         OrderedArrayMaxPQ<String> pq2 = new OrderedArrayMaxPQ<>(15);
         UnorderedLinkedListMaxPQ<String> pq3 = new UnorderedLinkedListMaxPQ<>();
+        OrderedLinkedListMaxPQ<String> pq4 = new OrderedLinkedListMaxPQ<>();
         String[] a = "EX2.4.3TEST".split("");
         for (String s : a) {
-            pq.insert(s);
+            pq1.insert(s);
             pq2.insert(s);
             pq3.insert(s);
+            pq4.insert(s);
         }
-        while (!pq.isEmpty()) {
-            StdOut.print(pq.delMax() + " ");
+        while (!pq1.isEmpty()) {
+            StdOut.print(pq1.delMax() + " ");
         }
         StdOut.println();
 
@@ -30,6 +32,11 @@ public class Ex2_4_3 {
 
         while (!pq3.isEmpty()) {
             StdOut.print(pq3.delMax() + " ");
+        }
+        StdOut.println();
+
+        while (!pq4.isEmpty()) {
+            StdOut.print(pq4.delMax() + " ");
         }
         StdOut.println();
     }
@@ -148,4 +155,37 @@ public class Ex2_4_3 {
             return list.delete(LinkedList.maxNode(list));
         }
     }
+
+    public static class OrderedLinkedListMaxPQ<T extends Comparable<T>> extends LinkedListMaxPQ<T> {
+        public OrderedLinkedListMaxPQ() {
+            super();
+        }
+
+        @Override
+        public void insert(T x) {
+            int i = list.size() - 1;
+            while (i >= 0) {
+                T t = list.getItemByIndex(i);
+                if (less(x, t)) {
+                    i--;
+                } else {
+                    break;
+                }
+            }
+            StdOut.println(x);
+            StdOut.println(i);
+            StdOut.println();
+            if (i < 0) {
+                list.addFirst(x);
+                return;
+            }
+            list.insertAfter(list.findNode(i), list.generateNode(x));
+        }
+
+        @Override
+        public T delMax() {
+            return list.removeLast();
+        }
+    }
+
 }
