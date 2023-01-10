@@ -141,6 +141,21 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
     }
 
+    public static <T extends Comparable<T>> Node<T> maxNode(LinkedList<T> list) {
+        if (list.isEmpty()) {
+            return null;
+        }
+        Node<T> max = list.first;
+        Node<T> t = max.next;
+        while (t != null) {
+            if (less(max.item, t.item)) {
+                max = t;
+            }
+            t = t.next;
+        }
+        return max;
+    }
+
     public void remove(Item item) {
         if (first == null) {
             return;
@@ -179,6 +194,33 @@ public class LinkedList<Item> implements Iterable<Item> {
             }
         }
         return max;
+    }
+
+    public Item delete(Node<Item> node) {
+        if (first == null) {
+            return null;
+        }
+        Node<Item> current = first;
+        Node<Item> pre = first;
+        while (current != null) {
+            if (current == node) {
+                Item item = current.item;
+                if (current == first) {
+                    removeFirst();
+                } else {
+                    Node<Item> next = current.next;
+                    current.next = null;
+                    current.item = null;
+                    pre.next = next;
+                    size--;
+                }
+                return item;
+            } else {
+                pre = current;
+                current = current.next;
+            }
+        }
+        return null;
     }
 
     private void refresh() {

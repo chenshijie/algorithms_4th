@@ -1,5 +1,6 @@
 package com.jason.algs4ex.ch2_4;
 
+import com.jason.algs4ex.LinkedList;
 import edu.princeton.cs.algs4.StdOut;
 
 /*
@@ -10,10 +11,12 @@ public class Ex2_4_3 {
     public static void main(String[] args) {
         UnorderedArrayMaxPQ<String> pq = new UnorderedArrayMaxPQ<>(15);
         OrderedArrayMaxPQ<String> pq2 = new OrderedArrayMaxPQ<>(15);
+        UnorderedLinkedListMaxPQ<String> pq3 = new UnorderedLinkedListMaxPQ<>();
         String[] a = "EX2.4.3TEST".split("");
         for (String s : a) {
             pq.insert(s);
             pq2.insert(s);
+            pq3.insert(s);
         }
         while (!pq.isEmpty()) {
             StdOut.print(pq.delMax() + " ");
@@ -22,6 +25,11 @@ public class Ex2_4_3 {
 
         while (!pq2.isEmpty()) {
             StdOut.print(pq2.delMax() + " ");
+        }
+        StdOut.println();
+
+        while (!pq3.isEmpty()) {
+            StdOut.print(pq3.delMax() + " ");
         }
         StdOut.println();
     }
@@ -97,6 +105,47 @@ public class Ex2_4_3 {
             exch(max, n - 1);
 
             return pq[--n];
+        }
+    }
+
+    public abstract static class LinkedListMaxPQ<T extends Comparable<T>> {
+        protected LinkedList<T> list;
+
+        public LinkedListMaxPQ() {
+            list = new LinkedList<>();
+        }
+
+        protected boolean less(T v, T w) {
+            return v.compareTo(w) < 0;
+        }
+
+        public boolean isEmpty() {
+            return list.isEmpty();
+        }
+
+        public int size() {
+            return list.size();
+        }
+
+        public abstract void insert(T x);
+
+        public abstract T delMax();
+
+    }
+
+    public static class UnorderedLinkedListMaxPQ<T extends Comparable<T>> extends LinkedListMaxPQ<T> {
+        public UnorderedLinkedListMaxPQ() {
+            super();
+        }
+
+        @Override
+        public void insert(T x) {
+            this.list.addFirst(x);
+        }
+
+        @Override
+        public T delMax() {
+            return list.delete(LinkedList.maxNode(list));
         }
     }
 }
