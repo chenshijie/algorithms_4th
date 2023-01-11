@@ -47,7 +47,7 @@ public class Ex2_4_26 {
             Key max = pq[1];
             exch(1, N--);
             pq[N + 1] = null;
-            sink(1);
+            sinkWithInsertion(1);
             return max;
         }
 
@@ -82,7 +82,7 @@ public class Ex2_4_26 {
         }
 
         private void sink(int k) {
-            while (2 * k < N) {
+            while (2 * k <= N) {
                 int j = 2 * k;
                 if (j < N && less(j, j + 1)) {
                     j++;
@@ -93,6 +93,23 @@ public class Ex2_4_26 {
                 exch(k, j);
                 k = j;
             }
+        }
+
+        private void sinkWithInsertion(int k) {
+            Key min = pq[k];
+            int j = k;
+            while (2 * k <= N) {
+                j = 2 * k;
+                if (j < N && less(j, j + 1)) {
+                    j++;
+                }
+                if (less(pq[j], min)) {
+                    break;
+                }
+                pq[k] = pq[j];
+                k = j;
+            }
+            pq[k] = min;
         }
 
     }
