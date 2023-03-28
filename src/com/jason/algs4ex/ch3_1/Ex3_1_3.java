@@ -44,14 +44,35 @@ class OrderedSequentialSearchST<Key extends Comparable<Key>, Value> {
             return;
         }
 
-        for (Node x = first; x != null; x = x.next) {
-            if (key.equals(x.key)) {
-                x.val = val;
-                return;
+        if (first == null) {
+            first = new Node(key, val, null, null);
+            n++;
+        } else if (key.compareTo(first.key) < 0) {
+            first = new Node(key, val, first, null);
+            first.next.pre = first;
+            n++;
+        } else {
+            for (Node x = first; x != null; x = x.next) {
+                if (key.equals(x.key)) {
+                    x.val = val;
+                    return;
+                } else {
+                    if (x.key.compareTo(key) > 0) {
+                        x.pre = x.pre.next = new Node(key, val, x, x.pre);
+                        n++;
+                        return;
+                    }
+                }
+                if (x.next == null) {
+                    x.next = new Node(key, val, null, x);
+                    n++;
+                    return;
+                }
             }
+
         }
-        first = new Node(key, val, first);
-        n++;
+
+
     }
 
     public void delete(Key key) {
@@ -81,10 +102,13 @@ class OrderedSequentialSearchST<Key extends Comparable<Key>, Value> {
         private Value val;
         private Node next;
 
-        public Node(Key key, Value val, Node next) {
+        private Node pre;
+
+        public Node(Key key, Value val, Node next, Node pre) {
             this.key = key;
             this.val = val;
             this.next = next;
+            this.pre = pre;
         }
     }
 }
