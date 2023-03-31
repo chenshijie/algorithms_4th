@@ -11,12 +11,14 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class Ex3_1_8 {
     public static void main(String[] args) {
-        int minlen = 10;
+        int minLengthOfWord = 10;
         ST<String, Integer> st = new ST<>();
 
         while (!StdIn.isEmpty()) {
             String key = StdIn.readString();
-            if (key.length() < minlen) continue;
+            if (key.length() < minLengthOfWord) {
+                continue;
+            }
             if (st.contains(key)) {
                 st.put(key, st.get(key) + 1);
             } else {
